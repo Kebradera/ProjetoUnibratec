@@ -109,27 +109,12 @@ public class RepositorioMedico implements IRepositorioMedico{
     }
 
     @Override
-    public Medico pesquisar(Medico a) throws DatabaseException {
-        Medico x = null;
+    public ArrayList<Medico> pesquisar(String nome) throws DatabaseException {
+        ArrayList<Medico> x = new ArrayList<>();
         c = g.conectar();
-        String sql = "SELECT id,nome, crm, especialidade FROM medico WHERE id=?";
-        try{
-            PreparedStatement pst = c.prepareStatement(sql);
-            pst.setInt(1, a.getId());
-            ResultSet rs = pst.executeQuery();
-            if(rs.next()){
-                x = new Medico();
-                x.setId(rs.getInt("id") );
-                x.setNome(rs.getString("nome") );
-                x.setCrm(rs.getString("crm") );
-                x.setEspecialidade(rs.getString("especialidade") );
-            }
-            return x;
-        }catch(SQLException e){
-            throw new DatabaseException(e);
-        }finally{
-            g.desconectar(c);
-        }
+        String sql = "SELECT id,nome, crm, especialidade FROM medico WHERE nome=?";
+        g.desconectar(c);
+        return x;
     }
     
 }

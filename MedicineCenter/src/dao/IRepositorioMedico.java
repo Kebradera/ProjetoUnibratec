@@ -24,5 +24,5 @@ public interface IRepositorioMedico {
     
     public ArrayList<Medico> listar() throws DatabaseException;
     
-    public Medico pesquisar(Medico a) throws DatabaseException;
+    public ArrayList<Medico> pesquisar(String nome) throws DatabaseException;
 }
