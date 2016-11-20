@@ -7,6 +7,7 @@ package dao;
 
 import classes_basicas.Medico;
 import exceptions.DatabaseException;
+import exceptions.RepositorioException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -109,12 +110,21 @@ public class RepositorioMedico implements IRepositorioMedico{
     }
 
     @Override
-    public ArrayList<Medico> pesquisar(String nome) throws DatabaseException {
+    public ArrayList<Medico> pesquisarPorNome(String nome) throws DatabaseException, RepositorioException {
         ArrayList<Medico> x = new ArrayList<>();
         c = g.conectar();
         String sql = "SELECT id,nome, crm, especialidade FROM medico WHERE nome=?";
         g.desconectar(c);
         return x;
     }
-    
+
+    @Override
+    public ArrayList<Medico> pesquisarPorCRM(String crm) throws DatabaseException, RepositorioException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public ArrayList<Medico> pesquisarPorEspecialidade(String especialidade) throws DatabaseException, RepositorioException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

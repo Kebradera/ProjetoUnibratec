@@ -7,6 +7,7 @@ package dao;
 
 import classes_basicas.Medico;
 import exceptions.DatabaseException;
+import exceptions.RepositorioException;
 import java.util.ArrayList;
 
 /**
@@ -24,5 +25,9 @@ public interface IRepositorioMedico {
     
     public ArrayList<Medico> listar() throws DatabaseException;
     
-    public ArrayList<Medico> pesquisar(String nome) throws DatabaseException;
+    public ArrayList<Medico> pesquisarPorNome(String nome) throws DatabaseException, RepositorioException;
+    
+    public ArrayList<Medico> pesquisarPorCRM(String crm) throws DatabaseException, RepositorioException;
+    
+    public ArrayList<Medico> pesquisarPorEspecialidade(String especialidade) throws DatabaseException, RepositorioException;
 }
