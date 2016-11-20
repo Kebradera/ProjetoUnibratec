@@ -111,20 +111,85 @@ public class RepositorioMedico implements IRepositorioMedico{
 
     @Override
     public ArrayList<Medico> pesquisarPorNome(String nome) throws DatabaseException, RepositorioException {
-        ArrayList<Medico> x = new ArrayList<>();
-        c = g.conectar();
-        String sql = "SELECT id,nome, crm, especialidade FROM medico WHERE nome=?";
-        g.desconectar(c);
-        return x;
+        ArrayList<Medico> lista = new ArrayList<>();
+        Medico medico = null;
+            c = g.conectar();
+            
+            String sql = "SELECT id, crm, nome, especialidade FROM Medico WHERE nome=?";
+            
+            try{
+                PreparedStatement pst = c.prepareStatement(sql);
+                pst.setString(1, nome);
+                ResultSet rs = pst.executeQuery();
+                if(rs.next()){
+                    medico = new Medico();
+                    medico.setId(rs.getInt("id"));
+                    medico.setCrm(rs.getString("crm"));
+                    medico.setNome(rs.getString("nome"));
+                    medico.setEspecialidade(rs.getString("especialidade"));
+                    lista.add(medico);
+                }
+                return lista;
+            }catch(SQLException e){
+                throw new DatabaseException(e);
+            }finally{
+                g.desconectar(c);
+            }
     }
 
     @Override
     public ArrayList<Medico> pesquisarPorCRM(String crm) throws DatabaseException, RepositorioException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<Medico> lista = new ArrayList<>();
+        Medico medico = null;
+            c = g.conectar();
+            
+            String sql = "SELECT id, crm, nome, especialidade FROM Medico WHERE crm=?";
+            
+            try{
+                PreparedStatement pst = c.prepareStatement(sql);
+                pst.setString(1, crm);
+                ResultSet rs = pst.executeQuery();
+                if(rs.next()){
+                    medico = new Medico();
+                    medico.setId(rs.getInt("id"));
+                    medico.setCrm(rs.getString("crm"));
+                    medico.setNome(rs.getString("nome"));
+                    medico.setEspecialidade(rs.getString("especialidade"));
+                    lista.add(medico);
+                }
+                return lista;
+            }catch(SQLException e){
+                throw new DatabaseException(e);
+            }finally{
+                g.desconectar(c);
+            }
     }
 
     @Override
     public ArrayList<Medico> pesquisarPorEspecialidade(String especialidade) throws DatabaseException, RepositorioException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        ArrayList<Medico> lista = new ArrayList<>();
+        Medico medico = null;
+            c = g.conectar();
+            
+            String sql = "SELECT id, crm, nome, especialidade FROM Medico WHERE especialidade=?";
+            
+            try{
+                PreparedStatement pst = c.prepareStatement(sql);
+                pst.setString(1, especialidade);
+                ResultSet rs = pst.executeQuery();
+                if(rs.next()){
+                    medico = new Medico();
+                    medico.setId(rs.getInt("id"));
+                    medico.setCrm(rs.getString("crm"));
+                    medico.setNome(rs.getString("nome"));
+                    medico.setEspecialidade(rs.getString("especialidade"));
+                    lista.add(medico);
+                }
+                return lista;
+            }catch(SQLException e){
+                throw new DatabaseException(e);
+            }finally{
+                g.desconectar(c);
+            }
     }
 }

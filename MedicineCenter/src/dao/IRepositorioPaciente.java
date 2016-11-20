@@ -5,10 +5,18 @@
  */
 package dao;
 
+import classes_basicas.Paciente;
+import exceptions.DatabaseException;
+import java.util.ArrayList;
+
 /**
  *
  * @author Skywalker
  */
 public interface IRepositorioPaciente {
-    
+    void inserir(Paciente paciente) throws DatabaseException;
+    void excluir(Paciente paciente) throws DatabaseException;
+    void alterar(Paciente paciente) throws DatabaseException;
+    ArrayList<Paciente> listar() throws DatabaseException;
+    ArrayList<Paciente> pesquisar(Paciente pacienteparam) throws DatabaseException;
 }

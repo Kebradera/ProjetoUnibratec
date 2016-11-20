@@ -9,6 +9,7 @@ import classes_basicas.Medico;
 import dao.IRepositorioMedico;
 import dao.RepositorioMedico;
 import exceptions.DatabaseException;
+import exceptions.RepositorioException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -43,12 +44,17 @@ public class NGMedico {
         }
     }
     
-    public ArrayList<Medico> pesquisar(String nome)throws DatabaseException{
+    public ArrayList<Medico> pesquisarPorNome(String nome)throws DatabaseException, RepositorioException{
         try{
-            return repMedico.pesquisar(nome);
+            Medico medico = new Medico();
+            medico.setNome(nome);
+            return repMedico.pesquisarPorNome(medico.getNome());
         }catch(DatabaseException e){
-            throw new DatabaseException();
+            throw new DatabaseException(e);
+        }catch(RepositorioException e){
+            throw new RepositorioException(e);
         }
+        
     }
         
     public ArrayList<Medico> listar()throws DatabaseException{

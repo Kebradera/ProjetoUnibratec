@@ -5,10 +5,18 @@
  */
 package dao;
 
+import classes_basicas.Procedimento;
+import exceptions.DatabaseException;
+import java.util.ArrayList;
+
 /**
  *
  * @author Skywalker
  */
 public interface IRepositorioProcedimento {
-    
+    void inserir(Procedimento procedimento) throws DatabaseException;
+    void excluir(Procedimento procedimento) throws DatabaseException;
+    void alterar(Procedimento procedimento) throws DatabaseException;
+    ArrayList<Procedimento> listar() throws DatabaseException;
+    ArrayList<Procedimento> pesquisar(Procedimento procedimentoparam) throws DatabaseException;
 }
