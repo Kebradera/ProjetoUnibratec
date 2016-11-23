@@ -1,5 +1,10 @@
 package negocio;
 
+import classes_basicas.Procedimento;
+import dao.IRepositorioProcedimento;
+import dao.RepositorioProcedimento;
+import exceptions.DatabaseException;
+
 
 public class NGProcedimento{
     private IRepositorioProcedimento repProc = new RepositorioProcedimento();
