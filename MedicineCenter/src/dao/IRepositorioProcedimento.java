@@ -19,4 +19,5 @@ public interface IRepositorioProcedimento {
     void alterar(Procedimento procedimento) throws DatabaseException;
     ArrayList<Procedimento> listar() throws DatabaseException;
     ArrayList<Procedimento> pesquisar(Procedimento procedimentoparam) throws DatabaseException;
+    ArrayList<Procedimento> pesquisarProcedimentoPorDescricao(String procedimentoparam) throws DatabaseException;
 }

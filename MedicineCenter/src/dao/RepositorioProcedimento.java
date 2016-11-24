@@ -143,5 +143,34 @@ public class RepositorioProcedimento implements IRepositorioProcedimento {
                 g.desconectar(c);
             }
     }
+
+    @Override
+    public ArrayList<Procedimento> pesquisarProcedimentoPorDescricao(String procedimentoparam) throws DatabaseException {
+        ArrayList<Procedimento> lista = new ArrayList();
+        Procedimento procedimento = null;
+            c = g.conectar();
+            
+            String sql = "SELECT cod_procedimento, descricao, custo_atual FROM Procedimento WHERE descricao=?";
+            
+            try{
+                PreparedStatement pst = c.prepareStatement(sql);
+                pst.setString(1, procedimentoparam);
+                ResultSet rs = pst.executeQuery();
+                if(rs.next()){
+                   procedimento = new Procedimento();
+                   
+                   procedimento.setCod_procedimento(rs.getInt("cod_procedimento"));
+                   procedimento.setDescricao(rs.getString("descricao"));
+                   procedimento.setCusto_atual(rs.getString("custo_atual"));
+
+                   lista.add(procedimento);
+                }
+                return lista;
+            }catch(SQLException e){
+                throw new DatabaseException(e);
+            }finally{
+                g.desconectar(c);
+            }
+    }
     
 }

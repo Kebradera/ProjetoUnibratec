@@ -19,4 +19,5 @@ public interface IRepositorioPlanoSaude {
     void alterar(Plano_Saude plano_saude) throws DatabaseException;
     ArrayList<Plano_Saude> listar() throws DatabaseException;
     ArrayList<Plano_Saude> pesquisar(Plano_Saude plano_saudeparam) throws DatabaseException;
+    ArrayList<Plano_Saude> pesquisarPorOperadora(String plano_saudeparam) throws DatabaseException;
 }
