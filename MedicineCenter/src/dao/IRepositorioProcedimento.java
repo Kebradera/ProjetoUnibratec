@@ -15,9 +15,14 @@ import java.util.ArrayList;
  */
 public interface IRepositorioProcedimento {
     void inserir(Procedimento procedimento) throws DatabaseException;
+    
     void excluir(Procedimento procedimento) throws DatabaseException;
+    
     void alterar(Procedimento procedimento) throws DatabaseException;
+    
     ArrayList<Procedimento> listar() throws DatabaseException;
-    ArrayList<Procedimento> pesquisar(Procedimento procedimentoparam) throws DatabaseException;
-    ArrayList<Procedimento> pesquisarProcedimentoPorDescricao(String procedimentoparam) throws DatabaseException;
+    
+    ArrayList<Procedimento> pesquisarPorCodigo(int codigo_proc) throws DatabaseException;
+    
+    ArrayList<Procedimento> pesquisarProcedimentoPorDescricao(String descr_proc) throws DatabaseException;
 }

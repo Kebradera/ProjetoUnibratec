@@ -16,7 +16,11 @@ import java.util.ArrayList;
  * @author macbookwhite
  */
 public class NGPaciente {
-    IRepositorioPaciente repPaciente = new RepositorioPaciente();
+    IRepositorioPaciente repPaciente;
+
+    public NGPaciente() {
+        this.repPaciente = new RepositorioPaciente();
+    }
     
     public void inserirPaciente(Paciente p) throws DatabaseException{
         try{
@@ -42,7 +46,7 @@ public class NGPaciente {
         }
     }
     
-    public ArrayList<Paciente> listarPaciente(Paciente p) throws DatabaseException{
+    public ArrayList<Paciente> listarPacientes() throws DatabaseException{
         try{
            return repPaciente.listar();
         }catch(DatabaseException e){
@@ -51,13 +55,36 @@ public class NGPaciente {
         
     }
     
-    public ArrayList<Paciente> pesquisarPaciente(String numero_carteira) throws DatabaseException{
+    public ArrayList<Paciente> pesquisarPacientePorCPF(String cpf) throws DatabaseException{
         try{
-            Paciente pac = new Paciente();
-            pac.setNumero_carteira(numero_carteira);
-            return repPaciente.pesquisar(pac);
+            return repPaciente.pesquisarPorCPF(cpf);
         }catch(DatabaseException e){
             throw new DatabaseException(e);
         }
     }
+    
+    public ArrayList<Paciente> pesquisarPacientePorCodigo(int codigo) throws DatabaseException{
+        try{
+            return repPaciente.pesquisarPorCodigo(codigo);
+        }catch(DatabaseException e){
+            throw new DatabaseException(e);
+        }
+    }
+    
+    public ArrayList<Paciente> pesquisarPacientePorNome(String nome) throws DatabaseException{
+        try{
+            return repPaciente.pesquisarPorNome(nome);
+        }catch(DatabaseException e){
+            throw new DatabaseException(e);
+        }
+    }
+    
+    public ArrayList<Paciente> pesquisarPorNumeroCarteira(String numero_carteira) throws DatabaseException{
+        try{
+            return repPaciente.pesquisarPorNumeroCarteira(numero_carteira);
+        }catch(DatabaseException e){
+            throw new DatabaseException(e);
+        }
+    }
+    
 }

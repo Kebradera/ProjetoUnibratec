@@ -6,7 +6,10 @@
 package dao;
 
 import classes_basicas.Consulta;
+import classes_basicas.Medico;
+import classes_basicas.Paciente;
 import exceptions.DatabaseException;
+import java.sql.Date;
 import java.util.ArrayList;
 
 /**
@@ -15,8 +18,18 @@ import java.util.ArrayList;
  */
 public interface IRepositorioConsulta {
     void inserir(Consulta consulta) throws DatabaseException;
+    
     void excluir(Consulta consulta) throws DatabaseException;
+    
     void alterar(Consulta consulta) throws DatabaseException;
+    
     ArrayList<Consulta> listar() throws DatabaseException;
-    ArrayList<Consulta> pesquisar(Consulta consultaparam) throws DatabaseException;
+    
+    ArrayList<Consulta> pesquisarPorCodigo(int codigo) throws DatabaseException;
+    
+    ArrayList<Consulta> pesquisarPorData(Date data) throws DatabaseException;
+    
+    ArrayList<Consulta> pesquisarPorMedico(String medico) throws DatabaseException;
+    
+    ArrayList<Consulta> pesquisarPorPaciente(String paciente) throws DatabaseException;
 }

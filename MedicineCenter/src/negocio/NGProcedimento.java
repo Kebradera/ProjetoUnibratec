@@ -8,7 +8,11 @@ import java.util.ArrayList;
 
 
 public class NGProcedimento{
-    IRepositorioProcedimento repProcedimento = new RepositorioProcedimento();
+    IRepositorioProcedimento repProcedimento;
+
+    public NGProcedimento() {
+        this.repProcedimento = new RepositorioProcedimento();
+    }
     
     public void inserirProcedimento(Procedimento p) throws DatabaseException{
         try{
@@ -44,9 +48,7 @@ public class NGProcedimento{
     
     public ArrayList<Procedimento> pesquisarProcedimento(int cod_procedimento) throws DatabaseException{
         try{
-            Procedimento proc = new Procedimento();
-            proc.setCod_procedimento(cod_procedimento);
-            return repProcedimento.pesquisar(proc);
+            return repProcedimento.pesquisarPorCodigo(cod_procedimento);
         }catch(DatabaseException e){
             throw new DatabaseException(e);
         }
@@ -54,13 +56,9 @@ public class NGProcedimento{
     
     public ArrayList<Procedimento> pesquisarProcedimentoPorDescricao(String descricao) throws DatabaseException{
         try{
-            Procedimento proc = new Procedimento();
-            proc.setDescricao(descricao);
-            return repProcedimento.pesquisarProcedimentoPorDescricao(proc.getDescricao());
+            return repProcedimento.pesquisarProcedimentoPorDescricao(descricao);
         }catch(DatabaseException e){
             throw new DatabaseException(e);
         }
     }
-
-    
 }

@@ -10,7 +10,6 @@ import dao.IRepositorioMedico;
 import dao.RepositorioMedico;
 import exceptions.DatabaseException;
 import exceptions.RepositorioException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -18,7 +17,11 @@ import java.util.ArrayList;
  * @author Skywalker
  */
 public class NGMedico {
-    private IRepositorioMedico repMedico = new RepositorioMedico();
+    private IRepositorioMedico repMedico;
+
+    public NGMedico() {
+        this.repMedico = new RepositorioMedico();
+    }
     
     public void inserir(Medico med) throws DatabaseException{
         try{
@@ -43,19 +46,6 @@ public class NGMedico {
             throw new DatabaseException(ex);
         }
     }
-    
-    public ArrayList<Medico> pesquisarPorNome(String nome)throws DatabaseException, RepositorioException{
-        try{
-            Medico medico = new Medico();
-            medico.setNome(nome);
-            return repMedico.pesquisarPorNome(medico.getNome());
-        }catch(DatabaseException e){
-            throw new DatabaseException(e);
-        }catch(RepositorioException e){
-            throw new RepositorioException(e);
-        }
-        
-    }
         
     public ArrayList<Medico> listar()throws DatabaseException{
         try{
@@ -64,4 +54,35 @@ public class NGMedico {
             throw new DatabaseException();
         }
     }
+    
+    public ArrayList<Medico> pesquisarPorNome(String nome)throws DatabaseException, RepositorioException{
+        try{
+            return repMedico.pesquisarPorNome(nome);
+        }catch(DatabaseException e){
+            throw new DatabaseException(e);
+        }catch(RepositorioException e){
+            throw new RepositorioException(e);
+        }
+    }
+    
+    public ArrayList<Medico> pesquisarPorCRM(String crm)throws DatabaseException, RepositorioException{
+        try{
+            return repMedico.pesquisarPorCRM(crm);
+        }catch(DatabaseException e){
+            throw new DatabaseException(e);
+        }catch(RepositorioException e){
+            throw new RepositorioException(e);
+        }
+    }
+    
+    public ArrayList<Medico> pesquisarMedicoPorEspecialidade(String especialidade)throws DatabaseException, RepositorioException{
+        try{
+            return repMedico.pesquisarPorEspecialidade(especialidade);
+        }catch(DatabaseException e){
+            throw new DatabaseException(e);
+        }catch(RepositorioException e){
+            throw new RepositorioException(e);
+        }
+    }
+    
 }

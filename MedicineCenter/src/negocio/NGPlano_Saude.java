@@ -11,11 +11,15 @@ import java.util.ArrayList;
  * @author macbookwhite
  */
 public class NGPlano_Saude {
-    IRepositorioPlanoSaude repPlando = new RepositorioPlanoSaude();
+    IRepositorioPlanoSaude repPlano;
+
+    public NGPlano_Saude() {
+        this.repPlano = new RepositorioPlanoSaude();
+    }
     
     public void inserirPlanoSaude(Plano_Saude ps) throws DatabaseException{
         try{
-            repPlando.inserir(ps);
+            repPlano.inserir(ps);
         }catch(DatabaseException e){
             throw new DatabaseException(e);
         }
@@ -23,7 +27,7 @@ public class NGPlano_Saude {
     
     public void excluirPlanoSaude(Plano_Saude ps) throws DatabaseException{
         try{
-            repPlando.excluir(ps);
+            repPlano.excluir(ps);
         }catch(DatabaseException e){
             throw new DatabaseException(e);
         }
@@ -31,7 +35,7 @@ public class NGPlano_Saude {
     
     public ArrayList<Plano_Saude> listarPlanoSaude(Plano_Saude ps) throws DatabaseException{
         try{
-            return repPlando.listar();
+            return repPlano.listar();
         }catch(DatabaseException e){
             throw new DatabaseException(e);
         }
@@ -39,17 +43,15 @@ public class NGPlano_Saude {
     
     public void alterarPlanoSaude(Plano_Saude ps) throws DatabaseException{
         try{
-            repPlando.alterar(ps);
+            repPlano.alterar(ps);
         }catch(DatabaseException e){
             throw new DatabaseException(e);
         }
         
     }
-    public ArrayList<Plano_Saude> pesquisar(int cod_plano) throws DatabaseException{     
+    public ArrayList<Plano_Saude> pesquisarPlanoPorCodigo(int cod_plano) throws DatabaseException{     
         try{
-            Plano_Saude plano = new Plano_Saude();
-            plano.setCod_plano(cod_plano);
-            return repPlando.pesquisar(plano);
+            return repPlano.pesquisarPorCodigo(cod_plano);
         }catch(DatabaseException e){
             throw new DatabaseException(e);
         }
@@ -57,9 +59,7 @@ public class NGPlano_Saude {
     
     public ArrayList<Plano_Saude> pesquisarPlanoSaudePorOperadora(String nome_operadora) throws DatabaseException{     
         try{
-            Plano_Saude plano = new Plano_Saude();
-            plano.setNome_operadora(nome_operadora);
-            return repPlando.pesquisarPorOperadora(plano.getNome_operadora());
+            return repPlano.pesquisarPorOperadora(nome_operadora);
         }catch(DatabaseException e){
             throw new DatabaseException(e);
         }

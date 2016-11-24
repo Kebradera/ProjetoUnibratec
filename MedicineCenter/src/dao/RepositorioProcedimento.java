@@ -32,10 +32,9 @@ public class RepositorioProcedimento implements IRepositorioProcedimento {
     @Override
     public void inserir(Procedimento procedimento) throws DatabaseException {
         c = g.conectar();
-            String sql = "STATEMENT";
+            String sql = "INSERT INTO Procedimento (descricao, custo_atual) VALUES (?, ?)";
             try{
                 PreparedStatement pst = c.prepareStatement(sql);
-                pst.setInt(1,procedimento.getCod_procedimento());
 		pst.setString(2,procedimento.getDescricao());
 		pst.setString(3,procedimento.getCusto_atual());
 
@@ -69,13 +68,13 @@ public class RepositorioProcedimento implements IRepositorioProcedimento {
     @Override
     public void alterar(Procedimento procedimento) throws DatabaseException {
         c = g.conectar();
-            String sql = "STATEMENT";
+            String sql = "UPDATE Procedimento SET descricao=?, custo_atual=? WHERE cod_procedimento=?";
             try{
                 PreparedStatement pst = c.prepareStatement(sql);
                 
-                pst.setInt(1,procedimento.getCod_procedimento());
-		pst.setString(2,procedimento.getDescricao());
-		pst.setString(3,procedimento.getCusto_atual());
+		pst.setString(1,procedimento.getDescricao());
+		pst.setString(2,procedimento.getCusto_atual());
+                pst.setInt(3,procedimento.getCod_procedimento());
 
                 pst.executeUpdate();
             }catch(SQLException e){
@@ -116,16 +115,16 @@ public class RepositorioProcedimento implements IRepositorioProcedimento {
     }
 
     @Override
-    public ArrayList<Procedimento> pesquisar(Procedimento procedimentoparam) throws DatabaseException {
+    public ArrayList<Procedimento> pesquisarPorCodigo(int codigo_proc) throws DatabaseException {
         ArrayList<Procedimento> lista = new ArrayList();
         Procedimento procedimento = null;
             c = g.conectar();
             
-            String sql = "SELECT cod_procedimento, descricao, custo_atual FROM Procedimento WHERE id=?";
+            String sql = "SELECT cod_procedimento, descricao, custo_atual FROM Procedimento WHERE cod_procedimento=?";
             
             try{
                 PreparedStatement pst = c.prepareStatement(sql);
-                pst.setInt(1, procedimentoparam.getCod_procedimento());
+                pst.setInt(1, codigo_proc);
                 ResultSet rs = pst.executeQuery();
                 if(rs.next()){
                    procedimento = new Procedimento();

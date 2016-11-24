@@ -15,8 +15,18 @@ import java.util.ArrayList;
  */
 public interface IRepositorioPaciente {
     void inserir(Paciente paciente) throws DatabaseException;
+    
     void excluir(Paciente paciente) throws DatabaseException;
+    
     void alterar(Paciente paciente) throws DatabaseException;
+    
     ArrayList<Paciente> listar() throws DatabaseException;
-    ArrayList<Paciente> pesquisar(Paciente pacienteparam) throws DatabaseException;
+    
+    ArrayList<Paciente> pesquisarPorCodigo(int cod_paciente) throws DatabaseException;
+    
+    ArrayList<Paciente> pesquisarPorCPF(String cpf) throws DatabaseException;
+    
+    ArrayList<Paciente> pesquisarPorNome(String nome_paciente) throws DatabaseException;
+    
+    ArrayList<Paciente> pesquisarPorNumeroCarteira(String num_carteira) throws DatabaseException;
 }

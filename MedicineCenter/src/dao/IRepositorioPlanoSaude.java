@@ -15,9 +15,14 @@ import java.util.ArrayList;
  */
 public interface IRepositorioPlanoSaude {
     void inserir(Plano_Saude plano_saude) throws DatabaseException;
+    
     void excluir(Plano_Saude plano_saude) throws DatabaseException;
+    
     void alterar(Plano_Saude plano_saude) throws DatabaseException;
+    
     ArrayList<Plano_Saude> listar() throws DatabaseException;
-    ArrayList<Plano_Saude> pesquisar(Plano_Saude plano_saudeparam) throws DatabaseException;
-    ArrayList<Plano_Saude> pesquisarPorOperadora(String plano_saudeparam) throws DatabaseException;
+    
+    ArrayList<Plano_Saude> pesquisarPorCodigo(int cod_plano) throws DatabaseException;
+    
+    ArrayList<Plano_Saude> pesquisarPorOperadora(String nome_operadora) throws DatabaseException;
 }

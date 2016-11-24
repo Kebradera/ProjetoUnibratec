@@ -32,11 +32,10 @@ public class RepositorioPlanoSaude implements IRepositorioPlanoSaude {
     @Override
     public void inserir(Plano_Saude plano_saude) throws DatabaseException {
         c = g.conectar();
-            String sql = "STATEMENT";
+            String sql = "INSERT INTO Plano_Saude (nome_operadora, telefone, desc_plano) VALUES (?, ?, ?)";
             try{
                 PreparedStatement pst = c.prepareStatement(sql);
 
-                pst.setInt(1,plano_saude.getCod_plano());
 		pst.setString(2,plano_saude.getNome_operadora());
 		pst.setString(3,plano_saude.getTelefone());
 		pst.setString(4,plano_saude.getDesc_plano());
@@ -71,14 +70,15 @@ public class RepositorioPlanoSaude implements IRepositorioPlanoSaude {
     @Override
     public void alterar(Plano_Saude plano_saude) throws DatabaseException {
         c = g.conectar();
-            String sql = "STATEMENT";
+            String sql = "UPDATE Plano_Saude SET nome_operadora=?, telefone=?, desc_plano=? WHERE cod_plano=?";
             try{
                 PreparedStatement pst = c.prepareStatement(sql);
                 
-                pst.setInt(1,plano_saude.getCod_plano());
-		pst.setString(2,plano_saude.getNome_operadora());
-		pst.setString(3,plano_saude.getTelefone());
-		pst.setString(4,plano_saude.getDesc_plano());
+		pst.setString(1,plano_saude.getNome_operadora());
+		pst.setString(2,plano_saude.getTelefone());
+		pst.setString(3,plano_saude.getDesc_plano());
+                pst.setInt(4,plano_saude.getCod_plano());
+
 
                 pst.executeUpdate();
             }catch(SQLException e){
@@ -120,16 +120,16 @@ public class RepositorioPlanoSaude implements IRepositorioPlanoSaude {
     }
 
     @Override
-    public ArrayList<Plano_Saude> pesquisar(Plano_Saude plano_saudeparam) throws DatabaseException {
+    public ArrayList<Plano_Saude> pesquisarPorCodigo(int cod_plano) throws DatabaseException {
             ArrayList<Plano_Saude> lista = new ArrayList();
             Plano_Saude plano_saude = null;
             c = g.conectar();
             
-            String sql = "SELECT cod_plano, nome_operadora, telefone, desc_plano FROM Plano_Saude WHERE id=?";
+            String sql = "SELECT cod_plano, nome_operadora, telefone, desc_plano FROM Plano_Saude WHERE cod_plano=?";
             
             try{
                 PreparedStatement pst = c.prepareStatement(sql);
-                pst.setInt(1, plano_saudeparam.getCod_plano());
+                pst.setInt(1, cod_plano);
                 ResultSet rs = pst.executeQuery();
                 if(rs.next()){
                     plano_saude = new Plano_Saude();
@@ -149,7 +149,7 @@ public class RepositorioPlanoSaude implements IRepositorioPlanoSaude {
     }
 
     @Override
-    public ArrayList<Plano_Saude> pesquisarPorOperadora(String plano_saudeparam) throws DatabaseException {
+    public ArrayList<Plano_Saude> pesquisarPorOperadora(String nome_operadora) throws DatabaseException {
         ArrayList<Plano_Saude> lista = new ArrayList();
              Plano_Saude plano_saude = null;
              c = g.conectar();
@@ -158,7 +158,7 @@ public class RepositorioPlanoSaude implements IRepositorioPlanoSaude {
              
              try{
                  PreparedStatement pst = c.prepareStatement(sql);
-                 pst.setString(1, plano_saudeparam);
+                 pst.setString(1, nome_operadora);
                  ResultSet rs = pst.executeQuery();
                  if(rs.next()){
                      plano_saude = new Plano_Saude();
