@@ -6,8 +6,6 @@
 package dao;
 
 import classes_basicas.Consulta;
-import classes_basicas.Medico;
-import classes_basicas.Paciente;
 import exceptions.DatabaseException;
 import java.sql.Date;
 import java.util.ArrayList;

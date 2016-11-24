@@ -5,6 +5,8 @@
  */
 package medicinecenter;
 
+import gui.Main;
+
 /**
  *
  * @author aluno
@@ -15,7 +17,8 @@ public class MedicineCenter {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        gui.Main main = new Main();
+        main.show();
     }
     
 }
